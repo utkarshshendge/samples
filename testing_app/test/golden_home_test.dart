@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file
 
+import 'dart:io';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 import 'package:testing_app/models/favorites.dart';
@@ -22,7 +24,7 @@ void main() {
       await tester.pumpWidget(createHomeScreenGolden());
       await expectLater(find.byType(HomePage),
           matchesGoldenFile('goldens/home/HomePage.png'));
-    });
+    }, skip: !Platform.isWindows);
 
     testWidgets('Golden Test to see if ListView has correct UI',
         (tester) async {
@@ -30,7 +32,7 @@ void main() {
       await expectLater(find.byType(ListView),
           matchesGoldenFile('goldens/home/ListView.png'));
       // Verify if ListView shows up.
-    });
+    }, skip: !Platform.isWindows);
 
     testWidgets('Golden Test to see if an item in ListView has correct UI',
         (tester) async {
@@ -38,7 +40,7 @@ void main() {
 
       await expectLater(
           find.text('Item 0'), matchesGoldenFile('goldens/home/ListItem.png'));
-    });
+    }, skip: !Platform.isWindows);
 
     testWidgets('Golden Test to verify correct behaviour of IconButtons',
         (tester) async {
@@ -63,6 +65,6 @@ void main() {
       // Verify if the appropriate message is shown.
       await expectLater(find.text('Removed from favorites.'),
           matchesGoldenFile('goldens/home/RemovedMessages.png'));
-    });
+    }, skip: !Platform.isWindows);
   });
 }

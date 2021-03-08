@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
@@ -32,7 +34,8 @@ void main() {
         (tester) async {
       await tester.pumpWidget(createFavoritesScreenGolden());
       await expectLater(find.byType(FavoritesPage),
-          matchesGoldenFile('goldens/favorites/FavoritesPage.png'));
+          matchesGoldenFile('goldens/favorites/FavoritesPage.png'),
+          skip: !Platform.isWindows);
     });
 
     testWidgets('Golden Test to see if Placeholder shows in case of empty list',
@@ -40,7 +43,8 @@ void main() {
       await tester.pumpWidget(createFavoritesScreenGolden());
 
       await expectLater(find.text('No favorites added.'),
-          matchesGoldenFile('goldens/favorites/PlaceHolder.png'));
+          matchesGoldenFile('goldens/favorites/PlaceHolder.png'),
+          skip: !Platform.isWindows);
     });
 
     testWidgets('Golden Test to see if ListView shows up and has correct UI',
@@ -52,7 +56,8 @@ void main() {
 
       // Verify if ListView shows up.
       await expectLater(find.byType(ListView),
-          matchesGoldenFile('goldens/favorites/ListView.png'));
+          matchesGoldenFile('goldens/favorites/ListView.png'),
+          skip: !Platform.isWindows);
     });
 
     testWidgets('Testing Remove Button', (tester) async {
@@ -74,7 +79,8 @@ void main() {
 
       // Verify if the appropriate message is shown.
       await expectLater(find.text('Removed from favorites.'),
-          matchesGoldenFile('goldens/favorites/RemovedMessage.png'));
+          matchesGoldenFile('goldens/favorites/RemovedMessage.png'),
+          skip: !Platform.isWindows);
     });
   });
 }
